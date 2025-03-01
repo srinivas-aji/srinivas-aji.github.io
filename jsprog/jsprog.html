@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<body>
+<pre id="o"></pre>
+
+<script>
+  "use strict";
+
+  const NL="\n";
+
+  async function Print(...x) {
+      let o = document.getElementById("o");
+      o.append(x.join(" "));
+      // Not working
+      window.scrollTo(0, document.body.scrollHeight);
+  }
+
+  async function Clear() {
+      let o = document.getElementById("o");
+      o.innerText = "";
+  }
+
+  async function Input(pr) {
+      o.append(pr+ " ");
+      function promise_run(resolver) {
+          let c = document.createElement("INPUT");
+          c.setAttribute("type", "text");
+          o.append(c);
+          o.append("\n");
+          c.focus();
+          function getText(e) {
+              c.readOnly = true;
+              c.blur();
+              resolver(e.target.value);
+          }
+          c.addEventListener("change", getText);
+      }
+      let p = new Promise(promise_run);
+      return await p;
+  }
+
+  async function Sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+async function main() {
+try {
+    // ---------------------------------------------------------------------
+    // ---------------------------------------------------------------------
+    // ---------------------------------------------------------------------
+    // ---------------------------------------------------------------------
+    // ---------------------------------------------------------------------
+    // ---------------------------------------------------------------------
+    // ---------------------------------------------------------------------
+    // ---------------------------------------------------------------------
+    // ---------------------------------------------------------------------
+    // ---------------------------------------------------------------------
+    // ---------------------------------------------------------------------
+    // ---------------------------------------------------------------------
+    // Type your code here...
+    // ---------------------------------------------------------------------
+    // ---------------------------------------------------------------------
+    // ---------------------------------------------------------------------
+
+    // Ordinary print
+    Print("Demo of ordinary Print", NL);
+    Print(1, NL); // Number, NL is newline
+    Print(1, 2, NL);
+    Print(1);
+    Print(2);
+    Print(NL);
+    Print("abc", NL); // String
+    Print("def", NL);
+    Print("abc");
+    Print("def");
+    Print(NL);
+    Print("abcdef\n");
+    Print(NL);
+
+    // Input a number
+    Print("Input a number", NL);
+    let n = parseInt(await Input("Number"));
+    Print(n, NL);
+    Print(NL);
+
+    // For loop
+    Print("For loop", NL);
+    for (let i = 0; i < n; i++) {
+        Print(i, NL);
+    }
+    for (let i = 0; i < n; i++) {
+        Print("*");
+    }
+    Print(NL);
+    Print(NL);
+
+    // Numeric expressions: +, -, *, /, ** (exponentiation), % (remainder)
+    Print("Numeric expressions", NL);
+    let n1 = parseInt(await Input("Number 1"));
+    let n2 = parseInt(await Input("Number 2"));
+    Print(n1, "+", n2, "=", n1 + n2, NL);
+    Print(n1, "-", n2, "=", n1 - n2, NL);
+    Print(n1, "*", n2, "=", n1 * n2, NL);
+    Print(n1, "/", n2, "=", n1 / n2, NL);
+    Print(n1, "**", n2, "=", n1 ** n2, NL);
+    Print(n1, "%", n2, "=", n1 % n2, NL);
+    Print(NL);
+
+    // String slices, i.e. substrings.
+    // slice takes start position, and one above end position.
+    // Missing end means to end of string
+    Print("String slices", NL);
+    let s = await Input("String");
+    for (let i = 0; i < s.length; i++) {
+        Print("Slice", 0, i, "is", s.slice(0, i), NL);
+    }
+    for (let i = 0; i < s.length; i++) {
+        Print("Slice", i, i+1, "is", s.slice(i, i+1), NL);
+    }
+    Print(NL);
+
+    // Demo of Clear and Sleep
+    await Input("Enter a string for demo of Clear and Sleep");
+    for (let i = 0; i < 10; i++) {
+        Clear();
+        Print(" ".repeat(i) + i, NL); // Note: string.repeat()
+        await Sleep(500);
+    }
+    for (let i = 8; i >= 0; i--) {
+        Clear();
+        Print(" ".repeat(i) + i, NL);
+        await Sleep(500);
+    }
+
+    Print("End of demo.\n");
+
+    // ---------------------------------------------------------------------
+    // ---------------------------------------------------------------------
+    // ---------------------------------------------------------------------
+    // End of your code.
+    // ---------------------------------------------------------------------
+    // ---------------------------------------------------------------------
+    // ---------------------------------------------------------------------
+    // ---------------------------------------------------------------------
+    // ---------------------------------------------------------------------
+    // ---------------------------------------------------------------------
+    // ---------------------------------------------------------------------
+    // ---------------------------------------------------------------------
+    // ---------------------------------------------------------------------
+    // ---------------------------------------------------------------------
+    // ---------------------------------------------------------------------
+    // ---------------------------------------------------------------------
+} catch(error) {
+    console.log(error);
+    throw(error + "\n" + error.stack.split('\n')[0]);
+}
+}
+
+  async function mainWrap() {
+      main().then((value) => { }, (reason) => { Print("ERROR: " + reason)});
+      //main()
+  }
+  mainWrap()
+</script>
+
+</body>
+</html>
+
