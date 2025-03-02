@@ -8,14 +8,14 @@
 
   const NL="\n";
 
-  async function Print(...x) {
+  function Print(...x) {
       let o = document.getElementById("o");
       o.append(x.join(" "));
       // Not working
       window.scrollTo(0, document.body.scrollHeight);
   }
 
-  async function Clear() {
+  function Clear() {
       let o = document.getElementById("o");
       o.innerText = "";
   }
