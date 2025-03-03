@@ -62,6 +62,7 @@ try {
     // ---------------------------------------------------------------------
     // ---------------------------------------------------------------------
 
+
     // Ordinary print
     Print("Demo of ordinary Print", NL);
     Print(1, NL); // Number, NL is newline
@@ -130,6 +131,26 @@ try {
         Clear();
         Print(" ".repeat(i) + i, NL);
         await Sleep(500);
+    }
+
+    // Animation:
+    for (let i = 0; i < 20; i++) {
+        Clear();
+        Print("Simple animation\n\n\n");
+        for (let y1 = 0; y1 < 20; y1++) {
+            for (let x1 = 0; x1 < 40; x1++) {
+                let x = (x1 - 20)/2;
+                let y = y1 - 10;
+                let s = i % 10;
+                if ((x == s || x == -s) &&  (y == s || y == -s)) {
+                    Print("*");
+                } else {
+                    Print(" ");
+                }
+            }
+            Print(NL);
+        }
+        await Sleep(200);
     }
 
     Print("End of demo.\n");
